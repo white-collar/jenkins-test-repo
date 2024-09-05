@@ -69,7 +69,7 @@ pipeline {
 
         success {
             echo "success"
-            echo params.VERSION
+            echo "printing VERSION " + params.VERSION
         }
 
         failure {
