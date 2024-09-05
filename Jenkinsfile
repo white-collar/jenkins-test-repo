@@ -17,9 +17,6 @@ pipeline {
         maven my-maven
     }
 
-
-    CODE_CHANGES
-
     stages {
         stage("build") {
 
