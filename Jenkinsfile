@@ -4,7 +4,7 @@ pipeline {
 
     parameters{
         string(name: 'VERSION', defaultValue: '', description: 'version to dpeloy to prod')
-        choice(name: 'VERSION', choices: ['1.1.0'], description: "")
+        choice(name: 'VERSION', choices: ['1.1.0', 'dev', 'bla1'], description: "")
         booleanParam(name: 'executeTests', defaultValue: true, description: '')
     }
 
@@ -14,7 +14,7 @@ pipeline {
     }
 
     tools{
-        maven my-maven
+        maven 'my-maven'
     }
 
     stages {
@@ -53,7 +53,7 @@ pipeline {
                 sh "${SERVER_CREDENTIALS}"
 
                 withCredentials([
-                    usernamePassword(credentails: 'server-credentails', usernameVariable: USER, passwordVariable: PWD)]) 
+                    usernamePassword(credentails: 'server-credentials', usernameVariable: USER, passwordVariable: PWD)]) 
                     {
                     sh "some script ${USER} ${PWD}"
                    }
