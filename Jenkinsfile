@@ -4,8 +4,8 @@ pipeline {
 
     parameters{
         string(name: 'VERSION', defaultValue: '', description: 'version to dpeloy to prod')
-        choice(name: 'VERSION', choices: ['1.1.0', 'dev', 'bla1'], description: "")
-        booleanParam(name: 'executeTests', defaultValue: true, description: '')
+        choice(name: 'VERSION', choices: ['1.1.0', 'dev', 'bla1'], description: "this is test versions")
+        booleanParam(name: 'executeTests', defaultValue: true, description: 'this is test boolean')
     }
 
     environment {
