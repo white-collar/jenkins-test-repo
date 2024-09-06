@@ -47,7 +47,10 @@ pipeline {
             }
             
             steps {
-                gv.testApp()
+                script {
+                     gv.testApp()
+                }
+               
             }
         }
 
@@ -55,7 +58,9 @@ pipeline {
             
             steps {
 
-                gv.deployApp()
+                script {
+                    gv.deployApp()
+                }
                 
             }
         }
