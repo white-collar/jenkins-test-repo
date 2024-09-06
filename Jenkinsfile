@@ -1,3 +1,5 @@
+def gv
+
 pipeline {
 
     agent any 
@@ -18,22 +20,26 @@ pipeline {
     }
 
     stages {
+
+
+        stage("init") {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
+
+
         stage("build") {
 
-            steps {
-               echo 'Building the application' 
-               echo "Building version ${NEW_VERSION}"  
+            script{
+                gv.buildApp()
             }
         }
 
         stage("test") {
-            //  when {
-            //     expression {
-            //         BRANCH_NAME == 'dev' || BRANCH_NAME == 'master' && CODE_CHANGES == true
-            //     }
-            //  }
-
-
+            
             when {
                 expression {
                     params.executeTests
@@ -41,23 +47,16 @@ pipeline {
             }
             
             steps {
-                echo 'Test the application' 
+                gv.testApp()
             }
         }
 
         stage("deploy") {
             
             steps {
-                echo 'Deployment the application' 
-                echo "deploying with ${SERVER_CREDENTIALS}"
-                // sh "${SERVER_CREDENTIALS}"
 
-                // withCredentials([
-                //     usernamePassword(credentails: 'server-credentials', usernameVariable: USER, passwordVariable: PWD)]) 
-                //     {
-                //     sh "some script ${USER} ${PWD}"
-                //    }
-   
+                gv.deployApp()
+                
             }
         }
     }
