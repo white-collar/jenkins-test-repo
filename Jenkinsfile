@@ -1,4 +1,8 @@
 pipeline {
+
+    agen any
+
+
     stages {
         stage("init") {
             steps {
