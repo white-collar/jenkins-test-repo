@@ -1,9 +1,12 @@
 pipeline {
     stages {
         stage("init") {
-            script {
-                echo "Scratch jenkins file...."
+            steps {
+                script {
+                    echo "Scratch jenkins file...."
+                }
             }
+            
         }
     }
 }
