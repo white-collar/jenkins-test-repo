@@ -1,66 +1,50 @@
-def gv
-
 pipeline {
+    agent none 
 
-    agent any 
-
-    tools{
-        maven 'my-maven'
-    }
-
-    stages {
-
-        stage("init") {
+   stage('test') {
             steps {
                 script {
-                    echo "Init the build ...."
-                    gv = load "script.groovy"
+                    echo "Testing the application..."
+                    echo "Executing pipeline for branch $BRANCH_NAME"
                 }
             }
         }
 
 
-        stage("build jar") {
+    stages {
+        stage('build') {
+
+            when {
+                expression {
+                    BRANCH_NAME == 'java-app-and-test'
+                }
+            }
+
 
             steps {
-                script{
-                    echo "building the application ..."
-                    sh 'mvn package'
+                script {
+                    echo "Building the application...."
                 }
-            }   
+            }
         }
 
 
-       stage("build image") {
+
+        stage('deploy') {
+
+            when {
+                expression {
+                    BRANCH_NAME == 'java-app-and-test'
+                }
+            }
+
 
             steps {
-                script{
-                    echo "building the docker image ..."
-                    withCredentials([usernamePassword(credentialsId: 'fe0a4b7c-4e6b-48fb-8744-585d873a4b10', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh 'docker build -t jeston/demo-app:jma-1.7.7 .'
-                        sh "echo $PASS | docker login -u $USER --password-stdin"
-                        sh 'docker push jeston/demo-app:jma-1.7.7' 
-                    }
+                script {
+                    echo "Deploying the application"
                 }
-            }   
-        }
-
-
-    }
-
-    post {
-        always {
-            echo "always"        
-        }
-
-        success {
-            echo "success"
-            echo "printing VERSION " + params.VERSION
-        }
-
-        failure {
-            echo "failure"
+            }
+            
         }
     }
-
 }
