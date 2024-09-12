@@ -1,7 +1,13 @@
 pipeline {
     agent none 
 
-   stage('test') {
+
+
+
+    stages {
+
+
+        stage('test') {
             steps {
                 script {
                     echo "Testing the application..."
@@ -11,7 +17,6 @@ pipeline {
         }
 
 
-    stages {
         stage('build') {
 
             when {
