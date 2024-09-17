@@ -1,10 +1,24 @@
+@Library('jenkins-shared-library')
+def gv
+
+
 pipeline {
-    agent none 
+    agent any 
 
 
-
+    tools{
+        maven 'my-maven'
+    }
 
     stages {
+
+        stage('init') {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
 
 
         stage('test') {
