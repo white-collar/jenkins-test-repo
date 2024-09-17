@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script {
                     echo "Building the application...."
-                    buildImage()
+                    buildImage 'jeston/demo-app:jma-1.7.999'
                 }
             }
         }
