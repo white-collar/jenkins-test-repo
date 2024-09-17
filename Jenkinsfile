@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script {
                     echo "Building the application...."
-                    buildJar()
+                    buildImage()
                 }
             }
         }
