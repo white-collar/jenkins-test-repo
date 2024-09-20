@@ -31,7 +31,7 @@ pipeline {
         }
 
 
-        stage('build') {
+        stage('build and push') {
 
             when {
                 expression {
@@ -43,7 +43,9 @@ pipeline {
             steps {
                 script {
                     echo "Building the application...."
-                    buildImage 'jeston/demo-app:jma-1.7.9997'
+                    buildImage 'jeston/demo-app:jma-1.7.9998'
+                    dockerLogin()
+                    dockerPush 'jeston/demo-app:jma-1.7.9997'
                 }
             }
         }
