@@ -3,7 +3,7 @@
 
 library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
     [
-        $class: 'GitSSMSource',
+        $class: 'GitSCMSource',
         remote: 'https://github.com/white-collar/jenkins-shared-library.git',
         credentialsId: 'b417c2dc-cfc3-4e58-9a8e-687a803eb1f5'
     ]
