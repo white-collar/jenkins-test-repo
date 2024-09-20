@@ -8,7 +8,6 @@ library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
         credentialsId: 'b417c2dc-cfc3-4e58-9a8e-687a803eb1f5'
     ]
 )
-@Library('jenkins-shared-library@main')
 
 def gv
 
