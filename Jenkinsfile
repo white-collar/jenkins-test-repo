@@ -1,4 +1,15 @@
-@Library('jenkins-shared-library')
+//@Library('jenkins-shared-library')   it's only for shared library
+
+
+library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
+    [
+        $class: 'GitSSMSource',
+        remote: 'https://github.com/white-collar/jenkins-shared-library.git',
+        credentialsId: 'b417c2dc-cfc3-4e58-9a8e-687a803eb1f5'
+    ]
+)
+@Library('jenkins-shared-library@main')
+
 def gv
 
 
