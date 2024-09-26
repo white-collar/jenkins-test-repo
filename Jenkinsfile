@@ -94,5 +94,28 @@ pipeline {
             }
             
         }
+
+
+        stage('commit version update') {
+            steps {
+                script {
+                    withCredentials([usernamePassword (credentialsId: 'gitlab-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh 'git config user.email "jenkins@example.com"'
+                        sh 'git config user.name "jenkins"'
+                        
+                        
+                        sh 'git status'
+                        sh 'git branch'
+                        sh 'git config --list'
+                        
+                        
+                        sh "get remote set-url origin https://${USER}:${PASS}@github.com/white-collar/jenkins-test-repo.git"
+                        sh 'git add .'
+                        sh 'git commit -m "ci:version bump"'
+                        sh 'git push origin main HEAD:jenkins-jobs'
+                    }
+                }
+            }
+        }
     }
 }
